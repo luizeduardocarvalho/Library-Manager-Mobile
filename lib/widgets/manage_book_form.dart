@@ -20,7 +20,6 @@ class _ManageBookFormState extends State<ManageBookForm> {
   void _submit() {
     FocusScope.of(context).unfocus();
     widget.onSubmit(_bookCode, _lentToName);
-    Navigator.pop(context);
   }
 
   @override

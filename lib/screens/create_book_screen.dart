@@ -77,14 +77,14 @@ class _CreateBookScreenState extends State<CreateBookScreen> {
         children: [
           BookForm(_handleSubmit),
           if(_isLoading)
-            Container(
-              decoration: BoxDecoration(
-                  color: Color.fromRGBO(0, 0, 0, 0.5)
-              ),
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
+          Container(
+            decoration: BoxDecoration(
+                color: Color.fromRGBO(0, 0, 0, 0.5)
             ),
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
         ],
       ),
     );

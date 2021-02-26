@@ -12,9 +12,13 @@ class LendScreen extends StatefulWidget {
 class _LendScreenState extends State<LendScreen> {
 
   final _auth = FirebaseAuth.instance;
+  bool _isLoading = false;
 
   // TODO: Refactor
   Future<void> _handleSubmit(String bookCode, String lentToName) async {
+    setState(() {
+      _isLoading = true;
+    });
 
     var book = await FirebaseFirestore.instance.collection('books').doc(bookCode).get();
     var user = await FirebaseFirestore.instance.collection('users').doc(_auth.currentUser.uid).get();
@@ -48,6 +52,12 @@ class _LendScreenState extends State<LendScreen> {
         'history': bookHistory,
       });
     }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    Navigator.pop(context);
   }
 
   @override
@@ -68,6 +78,15 @@ class _LendScreenState extends State<LendScreen> {
       body: Stack(
         children: [
           ManageBookForm(_handleSubmit, true),
+          if(_isLoading)
+            Container(
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(0, 0, 0, 0.5)
+              ),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
         ],
       ),
     );
