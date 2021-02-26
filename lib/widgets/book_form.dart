@@ -22,7 +22,6 @@ class _BookFormState extends State<BookForm> {
   void _submit() {
     FocusScope.of(context).unfocus();
     widget.onSubmit(_book);
-    Navigator.pop(context);
   }
 
   void _handlePickedImage(File pickedImage) {

@@ -53,6 +53,7 @@ class _CreateBookScreenState extends State<CreateBookScreen> {
       setState(() {
         _isLoading = false;
       });
+      Navigator.pop(context);
     }
   }
 
