@@ -35,7 +35,7 @@ class _BookListScreenState extends State<BookListScreen> {
     var filteredList;
     setState(() {
       filteredList = bookList.where((a) {
-        if(a['name'].contains(value)) {
+        if(a['name'].toLowerCase().contains(value.toLowerCase()) || a['code'].contains(value)) {
           return true;
         } else {
           return false;
