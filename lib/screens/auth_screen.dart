@@ -44,11 +44,7 @@ class _AuthScreenState extends State<AuthScreen> {
             .set(userData);
       }
     }
-    on PlatformException catch(e) {
-      final msg = e.message ?? 'An error occurred! Check your credentials!';
-    }
     catch(e) {
-      final msg = e.message ?? 'An error occurred! Check your credentials!';
     } finally {
       setState(() {
         _isLoading = false;

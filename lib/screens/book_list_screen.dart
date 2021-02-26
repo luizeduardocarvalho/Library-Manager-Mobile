@@ -12,7 +12,7 @@ class BookListScreen extends StatefulWidget {
 class _BookListScreenState extends State<BookListScreen> {
 
   var bookList;
-  dynamic filteredBookList = [];
+  var filteredBookList = [];
   String bookName;
   bool _isLoading = false;
 
@@ -22,15 +22,33 @@ class _BookListScreenState extends State<BookListScreen> {
     });
 
     bookList = await FirebaseFirestore.instance.collection('books').get();
-
+    bookList.docs.forEach((doc) => {
+      filteredBookList.add(doc.data())
+    });
     setState(() {
+      bookList = filteredBookList;
       _isLoading = false;
     });
+  }
+
+  List<dynamic> filterBook(String value) {
+    var filteredList;
+    setState(() {
+      filteredList = bookList.where((a) {
+        if(a['name'].contains(value)) {
+          return true;
+        } else {
+          return false;
+        }
+      }).toList();
+    });
+    return filteredList;
   }
 
   @override
   void initState() {
     getBookList();
+
     super.initState();
   }
 
@@ -64,11 +82,7 @@ class _BookListScreenState extends State<BookListScreen> {
                         child: TextField(
                           onChanged: (value) {
                             setState(() {
-                              bookName = value;
-                              filteredBookList = bookList.docs.where((i)
-                              {
-                                i.data()['name'].toLowerCase().contains(bookName.toLowerCase()));
-                              };
+                              filteredBookList = filterBook(value);
                             });
                           },
                           decoration: kTextFieldDecoration.copyWith(

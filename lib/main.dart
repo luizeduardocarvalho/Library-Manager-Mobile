@@ -1,12 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:library_manager/screens/book_list_screen.dart';
-import 'package:library_manager/screens/create_book_screen.dart';
-import 'package:library_manager/screens/lend_screen.dart';
 import 'package:library_manager/screens/auth_screen.dart';
 import 'package:library_manager/screens/menu_screen.dart';
-import 'package:library_manager/screens/return_screen.dart';
 
 void main() {
   runApp(MyApp());

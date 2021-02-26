@@ -1,10 +1,7 @@
-import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:library_manager/constants.dart';
 import 'package:library_manager/models/auth_data.dart';
 import 'package:library_manager/widgets/menu_button.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(AuthData authData) onSubmit;
@@ -16,9 +13,7 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
   final AuthData _authData = AuthData();
-  final _auth = FirebaseAuth.instance;
 
   void _submit() {
     print(_authData);

@@ -73,6 +73,6 @@ class _ManageBookFormState extends State<ManageBookForm> {
           ),
         ),
       ),
-    );;
+    );
   }
 }

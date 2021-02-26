@@ -17,7 +17,6 @@ class _BookImagePickerState extends State<BookImagePicker> {
 
   File _pickedImageFile;
 
-  File _image;
   final picker = ImagePicker();
 
   Future<void> _pickImage() async {
