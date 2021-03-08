@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:library_manager/constants.dart';
 import 'package:library_manager/models/book.dart';
 import 'package:library_manager/widgets/book_image_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class BookForm extends StatefulWidget {
 
@@ -39,6 +40,7 @@ class _BookFormState extends State<BookForm> {
           child: Form(
             child: Column(
               children: [
+                if(!kIsWeb)
                 BookImagePicker(_handlePickedImage),
                 TextField(
                   key: ValueKey('code'),

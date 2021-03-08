@@ -20,19 +20,10 @@ class _CreateBookScreenState extends State<CreateBookScreen> {
     });
 
     try {
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('user_images')
-          .child(bookData.code + '.jpg');
-
-      await ref.putFile(bookData.image);
-      final url = await ref.getDownloadURL();
-
       final newBookData = {
         'name': bookData.name,
         'description': bookData.description,
         'code': bookData.code,
-        'image_url': url,
         'is_lent': false,
         'author': bookData.author,
         'history': [{
@@ -41,6 +32,17 @@ class _CreateBookScreenState extends State<CreateBookScreen> {
           'lent_to': 'SENAC'
         }]
       };
+
+      if(bookData.image != null) {
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('user_images')
+            .child(bookData.code + '.jpg');
+
+        await ref.putFile(bookData.image);
+        final url = await ref.getDownloadURL();
+        newBookData['image_url'] = url;
+      }
 
       await FirebaseFirestore.instance
           .collection('books')
