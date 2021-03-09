@@ -53,14 +53,15 @@ class _BookScreenState extends State<BookScreen> {
                     ),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: widget.bookData['image_url'] == null ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
                             child: Text(
                               '${widget.bookData['code']} - ${widget.bookData['name']}',
                               style: TextStyle(
-                                fontSize: 25.0,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -83,7 +84,8 @@ class _BookScreenState extends State<BookScreen> {
                               widget.bookData['is_lent'] ? 'Unavailable' : 'Available',
                               style: TextStyle(
                                 fontSize: 20.0,
-                                color: widget.bookData['is_lent'] ? Colors.blueAccent : Colors.green[800],
+                                color: widget.bookData['is_lent'] ? Colors.red[800] : Colors.green[800],
+                                fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),

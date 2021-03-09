@@ -10,7 +10,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
@@ -44,6 +43,7 @@ class _AuthScreenState extends State<AuthScreen> {
       }
     }
     catch(e) {
+      ErrorWidget(e);
     } finally {
       setState(() {
         _isLoading = false;
