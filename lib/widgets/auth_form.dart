@@ -16,7 +16,6 @@ class _AuthFormState extends State<AuthForm> {
   final AuthData _authData = AuthData();
 
   void _submit() {
-    print(_authData);
     FocusScope.of(context).unfocus();
     widget.onSubmit(_authData);
   }

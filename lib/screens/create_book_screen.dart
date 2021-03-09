@@ -50,7 +50,6 @@ class _CreateBookScreenState extends State<CreateBookScreen> {
           .set(newBookData);
     }
     catch(e) {
-      print(e);
     } finally {
       setState(() {
         _isLoading = false;
