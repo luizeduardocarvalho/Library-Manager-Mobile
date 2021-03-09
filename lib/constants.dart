@@ -20,6 +20,7 @@ const kMessageContainerDecoration = BoxDecoration(
 
 const kSenacOrange = Color(0xFFED891E);
 const kSenacBlue = Color(0xFF155595);
+const kSenacBlueDarker = Color(0xFF0F3B66);
 const kSenacLightOrange = Color(0xFFF5BF86);
 
 const kTextFieldDecoration = InputDecoration(

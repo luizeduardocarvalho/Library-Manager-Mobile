@@ -57,8 +57,16 @@ class _ManageBookFormState extends State<ManageBookForm> {
                   },
                 ),
                 SizedBox(height: 12.0,),
-                RaisedButton(
-                  color: Color(0xFF155595),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return kSenacBlueDarker;
+                        return kSenacBlue; // Use the component's default.
+                      },
+                    ),
+                  ),
                   onPressed: _submit,
                   child: Text(
                     'Submit',

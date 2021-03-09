@@ -39,41 +39,53 @@ class _BookScreenState extends State<BookScreen> {
             padding: EdgeInsets.only(top: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start                                                     ,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    if(widget.bookData['image_url'] != null)
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.only(left: 30.0),
                         child: Image(image: NetworkImage(widget.bookData['image_url'])),
                       ),
                     ),
-                    SizedBox(width: 10.0,),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: widget.bookData['image_url'] == null ? CrossAxisAlignment.center : CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            '${widget.bookData['code']} - ${widget.bookData['name']}',
-                            style: TextStyle(
-                              fontSize: 25.0
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
+                            child: Text(
+                              '${widget.bookData['code']} - ${widget.bookData['name']}',
+                              style: TextStyle(
+                                fontSize: 25.0,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(height: 5.0,),
-                          Text(
-                            widget.bookData['author'],
-                            style: TextStyle(
-                              fontSize: 20.0
+                          SizedBox(height: 10.0,),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              widget.bookData['author'],
+                              style: TextStyle(
+                                fontSize: 20.0
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
-                          SizedBox(height: 20,),
-                          Text(
-                            widget.bookData['is_lent'] ? 'Unavailable' : 'Available',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: widget.bookData['is_lent'] ? Colors.red : Colors.green,
+                          SizedBox(height: 10,),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              widget.bookData['is_lent'] ? 'Unavailable' : 'Available',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: widget.bookData['is_lent'] ? Colors.blueAccent : Colors.green[800],
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
@@ -88,44 +100,93 @@ class _BookScreenState extends State<BookScreen> {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.all(25.0),
-                    child: Container(
-                      child: ListView.builder(
-                        itemCount: widget.bookData['history'].length,
-                        itemBuilder: (ctx, i) {
-                          return Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Container(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      widget.bookData['history'][widget.bookData['history'].length - 1 - i]['lent_to'],
-                                      style: TextStyle(
-                                        color: i == 0 ? Colors.red : Colors.black,
-                                      ),
-                                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Student',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Expanded(
-                                    child: Text(
-                                      widget.bookData['history'][widget.bookData['history'].length - 1 - i]['lent_by'],
-                                      style: TextStyle(
-                                        color: i == 0 ? Colors.red : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    DateFormat().add_yMMMEd().format(widget.bookData['history'][widget.bookData['history'].length - 1 - i]['date'].toDate()).toString(),
-                                    style: TextStyle(
-                                      color: i == 0 ? Colors.red : Colors.black,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                      color: Colors.white,
+                              SizedBox(width: 5.0,),
+                              Expanded(
+                                child: Text(
+                                  'Teacher',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 5.0,),
+                              Expanded(
+                                child: Text(
+                                  'Date',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          color: Colors.white,
+                        ),
+                        Expanded(
+                          child: Container(
+                           child: ListView.builder(
+                             itemCount: widget.bookData['history'].length,
+                             itemBuilder: (ctx, i) {
+                               return Container(
+                                 padding: EdgeInsets.all(10.0),
+                                 child: Row(
+                                   children: [
+                                     Expanded(
+                                       child: Text(
+                                         widget.bookData['history'][widget.bookData['history'].length - 1 - i]['lent_to'],
+                                         style: TextStyle(
+                                           color: Colors.black,
+                                           fontSize: 12.0,
+                                         ),
+                                       ),
+                                     ),
+                                     SizedBox(width: 5.0,),
+                                     Expanded(
+                                       child: Text(
+                                         widget.bookData['history'][widget.bookData['history'].length - 1 - i]['lent_by'],
+                                         style: TextStyle(
+                                           color: Colors.black,
+                                           fontSize: 12.0,
+                                         ),
+                                       ),
+                                     ),
+                                     SizedBox(width: 5.0,),
+                                     Expanded(
+                                       child: Text(
+                                         DateFormat().add_yMMMEd().format(widget.bookData['history'][widget.bookData['history'].length - 1 - i]['date'].toDate()).toString(),
+                                         style: TextStyle(
+                                           color: Colors.black,
+                                           fontSize: 12.0,
+                                         ),
+                                       ),
+                                     ),
+                                   ],
+                                 ),
+                               );
+                             },
+                           ),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

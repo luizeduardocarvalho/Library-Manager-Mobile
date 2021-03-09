@@ -78,8 +78,7 @@ class _AuthFormState extends State<AuthForm> {
               colour: Color(0xFFED891E),
               text: _authData.isLogin ? 'Log In' : 'Sign Up',
             ),
-            FlatButton(
-              textColor: Theme.of(context).primaryColor,
+            TextButton(
               onPressed: () {
                 setState(() {
                   _authData.toggleMode();

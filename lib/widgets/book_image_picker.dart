@@ -43,7 +43,7 @@ class _BookImagePickerState extends State<BookImagePicker> {
               backgroundColor: Color(0xFFFFFFFF),
               backgroundImage: _pickedImageFile != null ? FileImage(_pickedImageFile) : null,
             ),
-            FlatButton.icon(
+            TextButton.icon(
               onPressed: _pickImage,
               icon: Icon(
                 Icons.image,

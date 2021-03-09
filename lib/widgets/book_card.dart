@@ -21,9 +21,11 @@ class BookCard extends StatelessWidget {
             ),
             child: Row(
               children: [
+                if(this.book['image_url'] != null)
                 CircleAvatar(
                   backgroundImage: NetworkImage(book['image_url']),
                 ),
+                if(this.book['image_url'] != null)
                 SizedBox(width: 10.0,),
                 Text(
                   book['name'],

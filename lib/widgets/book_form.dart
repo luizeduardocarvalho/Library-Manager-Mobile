@@ -74,8 +74,16 @@ class _BookFormState extends State<BookForm> {
                   onChanged: (value) => _book.author = value,
                 ),
                 SizedBox(height: 12.0,),
-                RaisedButton(
-                  color: Color(0xFF155595),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return kSenacBlueDarker;
+                        return kSenacBlue; // Use the component's default.
+                      },
+                    ),
+                  ),
                   onPressed: _submit,
                   child: Text(
                     'Add Book',
