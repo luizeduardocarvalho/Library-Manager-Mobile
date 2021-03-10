@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:library_manager/widgets/manage_book_form.dart';
 
@@ -10,6 +11,7 @@ class ReturnScreen extends StatefulWidget {
 
 class _ReturnScreenState extends State<ReturnScreen> {
   bool _isLoading = false;
+  final _auth = FirebaseAuth.instance;
 
   Future<void> _handleSubmit(bookCode, lentToName) async {
     setState(() {
@@ -21,6 +23,18 @@ class _ReturnScreenState extends State<ReturnScreen> {
         .doc(bookCode)
         .update({
       'is_lent': false,
+    });
+
+    var teacher = await FirebaseFirestore.instance
+        .collection('teachers')
+        .where('user_id', isEqualTo: _auth.currentUser.uid)
+        .get();
+
+    await FirebaseFirestore.instance
+        .collection('teachers')
+        .doc(teacher.docs[0].id)
+        .update({
+      'books': FieldValue.arrayRemove([bookCode.toString()])
     });
 
     setState(() {

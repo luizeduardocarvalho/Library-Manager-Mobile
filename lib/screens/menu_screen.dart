@@ -5,6 +5,7 @@ import 'package:library_manager/screens/book_list_screen.dart';
 import 'package:library_manager/screens/create_book_screen.dart';
 import 'package:library_manager/screens/lend_screen.dart';
 import 'package:library_manager/screens/return_screen.dart';
+import 'package:library_manager/screens/teachers_screen.dart';
 import 'package:library_manager/widgets/menu_card_button.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -66,9 +67,9 @@ class MenuScreen extends StatelessWidget {
                     color: Color(0xFFA6A6A6),
                   ),
                   MenuCardButton(
-                    onTap: null,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => TeachersScreen())),
                     buttonText: 'Teachers',
-                    color: Color(0xFFA6A6A6),
+                    color: kMenuCardButtonColor,
                   ),
                 ],
               ),

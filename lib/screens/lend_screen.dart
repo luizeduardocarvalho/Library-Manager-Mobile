@@ -22,7 +22,6 @@ class _LendScreenState extends State<LendScreen> {
 
     var book = await FirebaseFirestore.instance.collection('books').doc(bookCode).get();
     var user = await FirebaseFirestore.instance.collection('users').doc(_auth.currentUser.uid).get();
-
     var bookHistory = book.data()['history'];
     if(bookHistory == null) {
       var borrowHistory = <Map>[];
@@ -51,6 +50,18 @@ class _LendScreenState extends State<LendScreen> {
         'is_lent': true,
         'history': bookHistory,
       });
+
+      var teacher = await FirebaseFirestore.instance
+          .collection('teachers')
+          .where('user_id', isEqualTo: _auth.currentUser.uid)
+          .get();
+
+      await FirebaseFirestore.instance
+          .collection('teachers')
+          .doc(teacher.docs[0].id)
+          .update({
+            'books': FieldValue.arrayUnion([bookCode.toString()])
+          });
     }
 
     setState(() {
